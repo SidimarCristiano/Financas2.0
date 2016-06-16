@@ -140,6 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			$this->session->sess_destroy();
 			$variavel['mensagem'] = "Obrigada por utilizar este sistema.";
+			$variavel['local'] = "home_c";
 			$this->load->view('errors/html/erro_v', $variavel);
 		}//fim logout
 

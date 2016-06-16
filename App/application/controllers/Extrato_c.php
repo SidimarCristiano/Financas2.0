@@ -16,8 +16,34 @@ class Principal_c extends CI_Controller
 
 	public function carregarDados(){
 
+       	  $despUsuario=$this->Despesas_m->get($usuario['id']);
+          $despUsuario=$despUsuario->result_array();//convertendo pra array.
+          $dados['despesas']=$despUsuario;
+
+           //carrega receitas de usuario
+       	  $receitaUsuario=$this->Receitas_m->get($usuario['id']);
+          $receitaUsuario=$receitaUsuario->result_array();//convertendo pra array.
+          $dados['receitas']=$receitaUsuario;
+			
+		$this->juncaoIncercao($dados);
+			
+	}
+
+	// public function juncaoIncercao($dados){
+	// 	foreach ($dados as $key => $value) {
+	// 		print_r($value);
+		
+	// 		foreach ($value as $chave => $valor) {
+	// 			$arrayName = array("$chave" => $valor);
+	// 		}
+	// 		die();
+	// 	}
+
+
 		
 	}
+
+
 }
 
 ?>

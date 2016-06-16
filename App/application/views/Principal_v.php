@@ -99,17 +99,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 					</thead>
 					<tbody>
-					<?php  foreach($extratos as $extrato){ ?>
+					<?php  //foreach($extratos as $extrato){ ?>
 								<tr>
 								
-								<td><?= $extrato['data'] ?></td>
-								<td><?= $extrato['descricao'] ?></td>
-								<td><?= $extrato['tipo'] ?></td>
-								<td><?= $extrato['categoria'] ?></td>
-								<td><?= $extrato['saldo'] ?></td>
+								<td><!-- <?= $extrato['data'] ?> --></td>
+								<td><!-- <?= $extrato['descricao'] ?> --></td>
+								<td><!-- <?= $extrato['tipo'] ?> --></td>
+								<td><!-- <?= $extrato['categoria'] ?> --></td>
+								<td><!-- <?= $extrato['saldo'] ?> --></td>
 									
 							</tr>
-						<?php } ?>     
+						<?php// } ?>     
 						<? ?>     
 					</tbody>
 			</table>

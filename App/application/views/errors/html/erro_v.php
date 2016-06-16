@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 			</div>
 			<div class="row text-center">
-				<?= anchor("Principal_c", 'Home_c');  ?>
+				<?= anchor("$local", 'Home_c');  ?>
 			</div>
 		</div>	
 	</div>

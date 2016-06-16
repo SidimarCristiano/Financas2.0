@@ -25,22 +25,22 @@ class Extrato_m extends CI_Model
     //     }
        
     // }
-    public function get($idUsuario = null)
-	{
-    $this->db->select('despesas.data, despesas.descricao, despesas.categoria, despesas.saldo, receitas.data, receitas.descricao, receitas.categoria, despesas.id_usuario, receitas.id_usuario');
+ //    public function get($idUsuario = null)
+	// {
+//     $this->db->select('despesas.data, despesas.descricao, despesas.categoria, receitas.data, despesas.saldo,receitas.descricao, receitas.categoria, despesas.id_usuario, receitas.id_usuario');
    
-    $this->db->from('despesas');
-    //$this->db->where('id_usuario', $idUsuario);
-    $this->db->join('receitas', "despesas.id_usuario = $idUsuario");
+//     $this->db->from('despesas','receitas');
+//     //$this->db->where('id_usuario', $idUsuario);
+//     $this->db->where("despesas.id_usuario = extrato.id_usuario ");
 
-    $query = $this->db->get();
-    $result = $query->result();
+//     $query = $this->db->get();
+//     $result = $query->result();
    
-    var_dump($result);
+//     var_dump($result);
  
-    die();
-    return $result;
-}
+//     die();
+//     return $result;
+// }
     //alterando dados de uma linha da tabela
     // public function consultar($id_receita){
     //     if ($id_receita) {
@@ -70,9 +70,49 @@ class Extrato_m extends CI_Model
     //     return $this->db->delete('receitas');
 
     // }
+public function carregarDados($id){
+            $this->load->model("Despesas_m");
+            $this->load->model("Categoria_m");
+          $despUsuario=$this->Despesas_m->get($id);
+          $despUsuario=$despUsuario->result_array();//convertendo pra array.
+          $dados['despesas']=$despUsuario;
 
+           //carrega receitas de usuario
+          $receitaUsuario=$this->Receitas_m->get($id);
+          $receitaUsuario=$receitaUsuario->result_array();//convertendo pra array.
+          $dados['receitas']=$receitaUsuario;
+            
+            $this->juncaoIncercao($dados);
+            
+    }
 
+    public function juncaoIncercao($dados){
+        $interador =0 ;
+        foreach ($dados as $key => $value) { 
+            foreach ($value as $chave => $valor) {
+                $arrayName[$interador] = $valor;
+                  
+                    $interador++;
+            } 
+            
+        }
+         echo "</br>-------------arrayname['value']----</br>";
 
+        foreach ($arrayName as $key => $value) {
+            foreach ($value as $val) {
+                echo"</br>";
+               
+                print_r($val);
+                echo"</br>";
+            }echo "-------";
+           
+        }
+        echo "</br>-------------arrayname----</br>";
+        print_r($arrayName);
+        die();
+       
+     
+}
 }
 
 

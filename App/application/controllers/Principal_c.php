@@ -13,7 +13,8 @@ class Principal_c extends CI_Controller
         $this->load->model("Despesas_m");
         $this->load->model("Receitas_m");
         $this->load->model("Categoria_m");
-        $this->load->model("extrato_m");
+        $this->load->model("Extrato_m");
+        
 	}
 
 	public function index(){
@@ -33,13 +34,13 @@ class Principal_c extends CI_Controller
           $this->dados['receitas']=$receitaUsuario;
 
 
-         // carrega extrato de usuario
-       	  $extraUsuario=$this->extrato_m->get($usuario['id']);
-          $extraUsuario=$extraUsuario->result_array();//convertendo pra array.
-          $this->dados['extratos']=$extraUsuario;
+         //carrega extrato de usuario
+       	  // $extraUsuario=$this->Extrato_m->carregarDados($usuario['id']);
+          // $extraUsuario=$extraUsuario->result_array();//convertendo pra array.
+          // $this->dados['extratos']=$extraUsuario;
 
+          
 
-         
           $this->load->view('Principal_v', $this->dados);
 
 	}

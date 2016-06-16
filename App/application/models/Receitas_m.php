@@ -17,9 +17,10 @@ class Receitas_m extends CI_Model
        
         if ($idUsuario) {
             $this->db->where('id_usuario', $idUsuario);
-            $this->db->order_by("id_receita", 'desc');
-        return $this->db->get('receitas');
         }
+        $this->db->order_by("id_receita", 'desc');
+        return $this->db->get('receitas');
+        
        
     }
     //alterando dados de uma linha da tabela
