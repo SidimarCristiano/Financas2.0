@@ -32,11 +32,14 @@ class Despesas_m extends CI_Model
     public function salvar($dados=null){
         $this->db->where('id_usuario',$dados['id_usuario']);
         $this->db->insert('despesas',$dados);
+        $dados['tipo'] = 'despesa';
+        $this->db->insert('extrato',$dados);
         //$this->db->update('despesas',$dados);
 
     }
     public function alterar($idDespesa){
             $this->db->where('id_despesa', $idDespesa);
+            
              return $this->db->update('despesas',$dados);
 
     }

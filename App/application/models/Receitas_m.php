@@ -33,15 +33,16 @@ class Receitas_m extends CI_Model
 
     public function salvar($dados=null){
         if($dados['id_usuario']){
+            
             $this->db->where('id_usuario',$dados['id_usuario']);
         }
         $resultado = $this->db->insert('receitas',$dados);
-     return $resultado;
+        return $resultado;
 
     }
-    public function alterar($idDespesa){
-            $this->db->where('id_receita', $idDespesa);
-             return $this->db->update('receitas',$dados);
+    public function alterar($id_receita, $dados){
+            $this->db->where('id_receita', $id_receita);
+            return $this->db->update('receitas',$dados);
 
     }
 

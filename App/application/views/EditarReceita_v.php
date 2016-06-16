@@ -22,25 +22,26 @@
             
             
             <div class="form-group">
-                <label for="valor">Descricao</label>
-                <input type="text" name="valor" id="valor" class="form-control"  autofocus='true' />
+                <label for="descricao">Descricao</label>
+                <input type="text" name="descricao" id="descricao" class="form-control"  autofocus='true' value="<?= @$receita['descricao'] ?> "/>
             </div>
-                     <?php    
-                      echo "<p><label for='album'>Categorias: </label>";
-                      echo "<select name='id' id='id'>";
+                       
+                     <p><label for='categoria'>Categorias: </label>
+                     <select name='categoria' id='categoria'>
+                      <?php  
                         if (count($categorias)) {
                             foreach ($categorias as $categoria) {
-                                echo "<option value='". $categoria['id'] . "'>" . $categoria['descricao'] . "</option>";
+                                echo "<option value='". $categoria['descricao'] . "'>" . $categoria['descricao'] . "</option>";
                             }
                  
                         }
                         echo "</select><br/>";
                        ?>
             <div class="form-group">
-                <label for="descricao">Valor</label>
-                <input type="text" name="descricao" id="descricao" class="form-control"  autofocus='true' />
+                <label for="valor">Valor</label>
+                <input type="text" name="valor" id="valor" class="form-control"  autofocus='true' value="<?= @$receita['valor'] ?> "/>
             </div>
-       
+            <input type="hidden"  name="id_receita" value="<?= @$receita['id_receita'] ?> "></input>
             <div class="form-group text-right">
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>

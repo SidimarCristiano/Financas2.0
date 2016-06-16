@@ -28,37 +28,44 @@ class Receitas_c extends CI_Controller {
         $resultado = $resultado->result_array();
 
         $receitas['receita'] = $resultado['0'];//resultado do banco fica todo na posicao "zero"
-        $this->load->model('Categoria_m');
+       
 
         $receitas['categorias'] = $this->Categoria_m->getCategoria();
         
         $this->load->view('EditarReceita_v', $receitas);
 
     }
-
-    public function salvar(){
-        if($this->input->post('idUsuario')){
-            $dados['id_usuario'] = $this->input->post('idUsuario');
-        
-            $dados['descricao']=$this->input->post('descricao');
-            $dados['valor']=$this->input->post('valor');
-            $dados['categoria']=$this->input->post('categoria');
-            //$this->Receitas_m->salvar($dados);
-
-              if($this->Receitas_m->salvar($dados))
-                {
-                  $variavel['mensagem'] = "Cadastro de receita efetuado com sucesso!";
+    public function mensagem($resultado = null){
+          if($resultado){
+                 $variavel['mensagem'] = "Cadastro de receita efetuado com sucesso!";
                   $variavel['local'] = "Principal_c";
                   $this->load->view('Sucesso_v', $variavel);
                 }else {
                   $variavel['mensagem'] = "Erro ao gravar. Tente novamente.";
                   $this->load->view('errors/html/erro_v',$variavel);
-                } 
-          } else  {
-            echo" Id nao recuperdao ";
-            die();
-          }
+                }
     }
+
+    public function salvar(){
+            $dados['descricao']=$this->input->post('descricao');
+            $dados['valor']=$this->input->post('valor');
+            $dados['categoria']=$this->input->post('categoria');
+            $id=  $this->input->post('id_receita');
+
+          
+        if($this->input->post('idUsuario')!=null){
+            $dados['id_usuario'] = $this->input->post('idUsuario');
+            $this->mensagem($this->Receitas_m->salvar($dados));
+                 
+        }else  {
+
+           $this->mensagem($this->Receitas_m->alterar($id, $dados));
+        }
+          
+              
+         
+    }
+  
 
     public function excluir($idReceita=null){
         if($idReceita){

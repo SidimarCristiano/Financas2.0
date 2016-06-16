@@ -51,18 +51,15 @@ class Despesas_c extends CI_Controller {
 
     }
     public function salvar(){
-        if($this->input->post('idUsuario')){
-            $dados['id_usuario'] = $this->input->post('idUsuario');
             $dados['descricao']=$this->input->post('descricao');
             $dados['valor']=$this->input->post('valor');
             $dados['categoria']=$this->input->post('categoria');
+        if($this->input->post('idUsuario')){
+            $dados['id_usuario'] = $this->input->post('idUsuario');
+            
             $this->Despesas_m->salvar($dados);
-        }else
-        {
-           $dados['descricao']=$this->input->post('descricao');
-            $dados['valor']=$this->input->post('valor');
-            $dados['categoria']=$this->input->post('categoria');
-            $this->Despesas_m->alterar($dados);
+        }else{
+           $this->Despesas_m->alterar($dados);
         }
        
     }

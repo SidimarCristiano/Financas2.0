@@ -50,6 +50,7 @@ class Categoria_c extends CI_Controller{
 			if($this->Categoria_m->salvar($dados, $id)){
 
 				$variaveis['mensagem'] = "Registro gravado com sucesso!";
+				$variaveis['local'] = "Principal_c";
 				$this->load->view('Sucesso_v', $variaveis);
 
 			} else {

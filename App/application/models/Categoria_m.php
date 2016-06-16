@@ -7,7 +7,7 @@ class Categoria_m extends CI_Model {
 	public function salvar($dados = null, $id = null){
 
 		if ($dados){
-
+			
 			if($id){
 				$this->db->where('id', $id);
 
