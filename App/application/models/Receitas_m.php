@@ -23,7 +23,7 @@ class Receitas_m extends CI_Model
         
        
     }
-    //alterando dados de uma linha da tabela
+    
     public function consultar($id_receita){
         if ($id_receita) {
             $this->db->where('id_receita', $id_receita);
@@ -41,6 +41,7 @@ class Receitas_m extends CI_Model
         return $resultado;
 
     }
+    //alterando dados de uma linha da tabela
     public function alterar($id_receita, $dados){
             $this->db->where('id_receita', $id_receita);
             return $this->db->update('receitas',$dados);
