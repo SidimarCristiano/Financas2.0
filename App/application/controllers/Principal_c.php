@@ -24,20 +24,27 @@ class Principal_c extends CI_Controller
 
           //carrega despesas de usuario
 
-       	  $despUsuario=$this->Despesas_m->get($usuario['id']);
-          $despUsuario=$despUsuario->result_array();//convertendo pra array.
-          $this->dados['despesas']=$despUsuario;
+       	  // $despUsuario=$this->Despesas_m->get($usuario['id']);
+          // $despUsuario=$despUsuario->result_array();//convertendo pra array.
+         
+          // $this->dados['despesas']=$despUsuario;
 
-           //carrega receitas de usuario
-       	  $receitaUsuario=$this->Receitas_m->get($usuario['id']);
-          $receitaUsuario=$receitaUsuario->result_array();//convertendo pra array.
-          $this->dados['receitas']=$receitaUsuario;
+          //  //carrega receitas de usuario
+       	  // $receitaUsuario=$this->Receitas_m->get($usuario['id']);
+          // $receitaUsuario=$receitaUsuario->result_array();//convertendo pra array.
+          // $this->dados['receitas']=$receitaUsuario;
 
 
          //carrega extrato de usuario
-       	  // $extraUsuario=$this->Extrato_m->carregarDados($usuario['id']);
-          // $extraUsuario=$extraUsuario->result_array();//convertendo pra array.
-          // $this->dados['extratos']=$extraUsuario;
+          // $extraUsuario= $this->Extrato_m->carregarDados($usuario['id']);
+          // echo "testet teste";
+          // print_r($extraUsuario);
+          
+           //$extraUsuario=$extraUsuario->result_array();
+           // $this->dados['extratos']=$extraUsuario;
+       	  $extraUsuario=$this->Extrato_m->get($usuario['id']);
+          $extraUsuario=$extraUsuario->result_array();//convertendo pra array.
+          $this->dados['extratos']=$extraUsuario;
 
           
 

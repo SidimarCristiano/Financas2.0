@@ -42,6 +42,7 @@
                 <input type="text" name="valor" id="valor" class="form-control"  autofocus='true' value="<?= @$receita['valor'] ?> "/>
             </div>
             <input type="hidden"  name="id_receita" value="<?= @$receita['id_receita'] ?> "></input>
+           <!--  <input type="hidden"  name="id_usuario" value="<?= @$receita['id_usuario'] ?> "></input> -->
             <div class="form-group text-right">
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>

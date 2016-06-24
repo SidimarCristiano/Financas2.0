@@ -37,7 +37,7 @@ class Receitas_m extends CI_Model
             
             $this->db->where('id_usuario',$dados['id_usuario']);
         }
-        $resultado = $this->db->insert('receitas',$dados);
+        $resultado = $this->db->insert('extrato',$dados);
         return $resultado;
 
     }

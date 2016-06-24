@@ -23,31 +23,30 @@ class Despesas_m extends CI_Model
     //alterando dados de uma linha da tabela
     public function consultar($idDespesa){
         if ($idDespesa) {
-            $this->db->where('id_despesa', $idDespesa);
+            $this->db->where('id', $idDespesa);
         }
-        return $this->db->get('despesas');
+        return $this->db->get('extrato');
 
     }
 
     public function salvar($dados=null){
-        $this->db->where('id_usuario',$dados['id_usuario']);
-        $this->db->insert('despesas',$dados);
+     //   $this->db->where('id_usuario',$dados['id_usuario']);
+         return $this->db->insert('extrato',$dados);
      
-        $this->db->insert('extrato',$dados);
+        //$this->db->insert('despesas',$dados);
         //$this->db->update('despesas',$dados);
 
     }
-    public function alterar($idDespesa){
-            $this->db->where('id_despesa', $idDespesa);
-            
-             return $this->db->update('despesas',$dados);
+    public function alterar($idExtrato,$dados){
+            $this->db->where('id', $idExtrato);
+             return $this->db->update('extrato',$dados);
 
     }
 
     public function deletar($idDespesa){
 
-        $this->db->where('id_despesa', $idDespesa);
-        return $this->db->delete('despesas');
+        $this->db->where('id', $idDespesa);
+        return $this->db->delete('extrato');
 
     }
 

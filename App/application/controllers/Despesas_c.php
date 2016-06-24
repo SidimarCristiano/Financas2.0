@@ -11,6 +11,7 @@ class Despesas_c extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model("Despesas_m");
+         $this->load->model("Extrato_m");
        
 
         
@@ -35,10 +36,21 @@ class Despesas_c extends CI_Controller {
        //  $this->load->view('Principal_v', $this->dados);
         
     }
+      public function mensagem($resultado = null){
+          if($resultado){
+                 $variavel['mensagem'] = "Cadastro de receita efetuado com sucesso!";
+                  $variavel['local'] = "Principal_c";
+                  $this->load->view('Sucesso_v', $variavel);
+                }else {
+                  $variavel['local'] = "Principal_c";
+                  $variavel['mensagem'] = "Erro ao gravar. Tente novamente.";
+                  $this->load->view('errors/html/erro_v',$variavel);
+                }
+    }
     
-    public function editar($idDespesa=null)
+    public function editar($idExtrato=null)
     {
-        $resultado = $this->Despesas_m->consultar($idDespesa);
+        $resultado = $this->Despesas_m->consultar($idExtrato);
 
         $resultado = $resultado->result_array();
         
@@ -54,19 +66,40 @@ class Despesas_c extends CI_Controller {
             $dados['descricao']=$this->input->post('descricao');
             $dados['valor']=$this->input->post('valor');
             $dados['categoria']=$this->input->post('categoria');
-        if($this->input->post('idUsuario')){
+            $id=$this->input->post('id');
+            //$id_usuario =$this->input->post('id_usuario');
+          //  $dados['data'] = date('d/m/Y H:i:s');
+            $dados['tipo'] = $this->input->post('tipo');
+            // $extrato['id_usuario'] = $this->input->post('idUsuario');
+           
+          if($this->input->post('idUsuario')!=null){
             $dados['id_usuario'] = $this->input->post('idUsuario');
-            
-            $this->Despesas_m->salvar($dados);
-        }else{
-           $this->Despesas_m->alterar($dados);
+            // $extrato = $dados;
+            // $extrato['tipo'] = 'despesa';
+      
+            // $this->Extrato_m->salvar($extrato);
+            $this->mensagem($this->Despesas_m->salvar($dados));
+           //  $this->Extrato_m->salvar($extrato);// Estou salvando na tabela extrato sem relacao de iddespesa e id receita pois ele esta indo como novo.
+                 
+        }else  {
+           //$this->Extrato_m->alterar($id, $extrato);
+           $this->mensagem($this->Despesas_m->alterar($id, $dados));
         }
        
     }
 
-    public function excluir($idDespesa=null){
-        if($idDespesa){
-          $this->Despesas_m->deletar($idDespesa);
+    public function excluir($idExtrato=null){
+      if($idExtrato){
+      
+            if($this->Despesas_m->deletar($idExtrato))
+            {
+              $variavel['mensagem'] = "Registro excluida com sucesso!";
+              $variavel['local'] = "Principal_c";
+              $this->load->view('Sucesso_v', $variavel);
+            }else {
+              $variavel['mensagem'] = "Erro ao gravar. Tente novamente.";
+              $this->load->view('errors/html/erro_v');
+            }
         }else{
             echo "algo deu errado com o id";
         }

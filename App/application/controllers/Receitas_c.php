@@ -51,14 +51,18 @@ class Receitas_c extends CI_Controller {
             $dados['valor']=$this->input->post('valor');
             $dados['categoria']=$this->input->post('categoria');
             $id=  $this->input->post('id_receita');
-
+           // $id_usuario =$this->input->post('id_usuario');
+           
+            $dados['tipo'] = $this->input->post('tipo');
           
         if($this->input->post('idUsuario')!=null){
             $dados['id_usuario'] = $this->input->post('idUsuario');
+            
+           // $this->Extrato_m->salvar($extrato); 
             $this->mensagem($this->Receitas_m->salvar($dados));
                  
         }else  {
-
+           $this->Extrato_m->alterar($id, $extrato);
            $this->mensagem($this->Receitas_m->alterar($id, $dados));
         }
           
@@ -69,7 +73,8 @@ class Receitas_c extends CI_Controller {
 
     public function excluir($idReceita=null){
         if($idReceita){
-            if($this->Receitas_m->deletar($idReceita))
+             
+            if($this->Receitas_m->deletar($idReceita) && $this->Extrato_m->deletar($idReceita, "receita"))
             {
               $variavel['mensagem'] = "Receita excluida com sucesso!";
               $variavel['local'] = "Principal_c";
@@ -86,10 +91,10 @@ class Receitas_c extends CI_Controller {
    public function adcionar(){
            $this->load->model('Categoria_m');
            $idUsuario = $this->session->userdata('usuario');
-           $despesas['id'] = $idUsuario['id'];
-           $despesas['usuario'] = $idUsuario['user'];
-          $despesas['categorias'] = $this->Categoria_m->getCategoria();
-         $this->load->view('Receitas_v', $despesas );
+           $receitas['id'] = $idUsuario['id'];
+           $receitas['usuario'] = $idUsuario['user'];
+          $receitas['categorias'] = $this->Categoria_m->getCategoria();
+         $this->load->view('Receitas_v', $receitas );
 
    }
 }

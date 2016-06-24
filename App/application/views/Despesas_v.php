@@ -46,7 +46,9 @@
                 echo "</select><br/>";
                ?>
                 <input type="hidden" name="idUsuario" id="idUsuario" class="form-control"  autofocus='true' value=<?=$id ?> />
+                 <input type="hidden" name="tipo" id="tipo" class="form-control"  autofocus='true' value="despesa"/>
                <div class="form-group text-right">
+
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
             <?= form_close(); ?>
