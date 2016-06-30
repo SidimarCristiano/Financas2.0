@@ -46,11 +46,19 @@ class Principal_c extends CI_Controller
           $extraUsuario=$extraUsuario->result_array();//convertendo pra array.
           $this->dados['extratos']=$extraUsuario;
 
-          
-
+          //$this->getValor($usuario['id']);
           $this->load->view('Principal_v', $this->dados);
 
+
+
 	}
+//     public function getValor($id_usuario=null){
+//                $receitas = $this->Receitas_m->getSaldo($id_usuario);
+
+//                var_dump($receitas->result_array());
+//                die();
+// }
+
 }
 
 

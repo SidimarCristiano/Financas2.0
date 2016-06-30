@@ -19,7 +19,12 @@ class Receitas_c extends CI_Controller {
         
     }
 
+// public function getValor($id_usuario){
+//    $receitas['saldo'] = $this->Receitas_m->getSaldo($id_usuario);
 
+//    print_r($receitas);
+//    die();
+// }
     
     public function editar($idReceita=null){
         
@@ -51,13 +56,17 @@ class Receitas_c extends CI_Controller {
             $dados['valor']=$this->input->post('valor');
             $dados['categoria']=$this->input->post('categoria');
             $id=  $this->input->post('id_receita');
+           
            // $id_usuario =$this->input->post('id_usuario');
            
             $dados['tipo'] = $this->input->post('tipo');
           
         if($this->input->post('idUsuario')!=null){
             $dados['id_usuario'] = $this->input->post('idUsuario');
-            
+             $saldo= $this->Receitas_m->getSaldo($dados['id_usuario']);
+            $saldo = $saldo->result_array();
+           
+            $dados['saldo'] = ($saldo['0']['saldo']) + $dados['valor'];
            // $this->Extrato_m->salvar($extrato); 
             $this->mensagem($this->Receitas_m->salvar($dados));
                  

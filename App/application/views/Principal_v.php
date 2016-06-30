@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<td><?= $extrato['valor'] ?></td>
 								<td><?= $extrato['categoria'] ?></td>
 								<td><?= $extrato['saldo'] ?></td>
-								<td><?= anchor("Despesas_c/editar/".$extrato['id'], "Editar") ?></td>
+								<!-- <td><?= anchor("Despesas_c/editar/".$extrato['id'], "Editar") ?></td> -->
 								<td><?= anchor("Despesas_c/excluir/".$extrato['id'], "excluir") ?></td>
 									
 							</tr>

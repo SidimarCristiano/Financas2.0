@@ -37,6 +37,13 @@
                
                ?>
             <div class="form-group">
+                <label for="tipo">Tipo</label>
+                <select name="tipo">
+                    <option value="receita">receita</option>
+                    <option value="despesa">despesa</option>
+                </select> 
+            </div>
+            <div class="form-group">
                 <label for="valor">Valor</label>
                 <input type="text" name="valor" id="valor" class="form-control"  autofocus='true' value="<?= @$despesa['valor'] ?>"  />
             </div>

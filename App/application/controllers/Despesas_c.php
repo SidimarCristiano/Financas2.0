@@ -12,6 +12,7 @@ class Despesas_c extends CI_Controller {
         $this->load->library('session');
         $this->load->model("Despesas_m");
          $this->load->model("Extrato_m");
+          $this->load->model("Receitas_m");
        
 
         
@@ -62,11 +63,41 @@ class Despesas_c extends CI_Controller {
         $this->load->view('EditarDespesa_v', $despesas );
 
     }
+    public function saldo($tipo=null,$novoValor=null, $id_receita=null){
+            //
+            // print_r($saldo);
+            // die();
+            // 
+
+        $dado= $this->Despesas_m->consultar($id_receita);
+        $dado = $dado->result_array();
+        $dado = $dado['0'];
+        // $saldo= $this->Receitas_m->getSaldo($dado['0']['id_usuario']);//consulta no banco os saldos desse usuario do retornando a partir do ultimo(mais atual) que retorna na posicao '0'
+        //  $saldo = $saldo->result_array();
+        //  $saldo['1']//saldo anterior
+       
+
+      
+        if($tipo=='receita'){
+           $saldo= $dado['saldo']-$dado['valor'];
+           $dado['valor'] = $novoValor;
+           $NovoSaldo = $saldo + $dado['valor'];
+        }else{
+           $saldo= $dado['saldo']-$dado['valor'];
+           $dado['valor'] = $novoValor;
+           $NovoSaldo = $saldo - $dado['valor'];
+        }
+         return $NovoSaldo;
+
+    }
     public function salvar(){
             $dados['descricao']=$this->input->post('descricao');
             $dados['valor']=$this->input->post('valor');
             $dados['categoria']=$this->input->post('categoria');
+            $dados['tipo']=$this->input->post('tipo');
+           
             $id=$this->input->post('id');
+            
             //$id_usuario =$this->input->post('id_usuario');
           //  $dados['data'] = date('d/m/Y H:i:s');
             $dados['tipo'] = $this->input->post('tipo');
@@ -74,15 +105,18 @@ class Despesas_c extends CI_Controller {
            
           if($this->input->post('idUsuario')!=null){
             $dados['id_usuario'] = $this->input->post('idUsuario');
-            // $extrato = $dados;
-            // $extrato['tipo'] = 'despesa';
-      
+            $saldo= $this->Receitas_m->getSaldo($dados['id_usuario']);
+            $saldo = $saldo->result_array();
+           
+            $dados['saldo'] = ($saldo['0']['saldo']) - $dados['valor'];
             // $this->Extrato_m->salvar($extrato);
             $this->mensagem($this->Despesas_m->salvar($dados));
            //  $this->Extrato_m->salvar($extrato);// Estou salvando na tabela extrato sem relacao de iddespesa e id receita pois ele esta indo como novo.
                  
         }else  {
            //$this->Extrato_m->alterar($id, $extrato);
+          print_r($id);
+           $dados['saldo']=$this->saldo($dados['tipo'],$dados['valor'], $id);
            $this->mensagem($this->Despesas_m->alterar($id, $dados));
         }
        
